@@ -5,12 +5,14 @@ import {
   Outlet,
   redirect,
   useLoaderData,
+  useNavigation,
 } from "react-router-dom";
 import { createContact, getContacts } from "../contacts";
 
 export async function action() {
   const contact = await createContact();
-  //return { contact };
+  const navigation = useNavigation();
+
   return redirect(`/contacts/${contact.id}/edit`);
 }
 export async function loader() {
@@ -71,7 +73,10 @@ export default function Root() {
           )}
         </nav>
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={navigation.state === "loading" ? "loading" : ""}
+      >
         <Outlet />
       </div>
     </>
