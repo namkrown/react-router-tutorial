@@ -11,8 +11,6 @@ import { createContact, getContacts } from "../contacts";
 
 export async function action() {
   const contact = await createContact();
-  const navigation = useNavigation();
-
   return redirect(`/contacts/${contact.id}/edit`);
 }
 export async function loader() {
@@ -22,7 +20,7 @@ export async function loader() {
 
 export default function Root() {
   const { contacts } = useLoaderData();
-
+  const navigation = useNavigation();
   return (
     <>
       <div id="sidebar">
